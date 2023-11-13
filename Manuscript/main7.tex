@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{MLB Pitcher Injuries and Contributing Factors}
+\author{Ajay Natarajan - Statistics Major, University of Connecticut}
+\date{October 30, 2023}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Analytics have become prominent in usage in professional sports within the last two decades. One of the sports that has seen the most advancement within the field is baseball. However, there are various areas within the game of baseball that have had limited research and which are contributing to major inefficiencies at the professional level. A prominent one of these is injuries, particularly to pitchers. This paper will attempt to use available historical injury data as well as existing player and performance data to find significant factors contributing to pitcher injury, and lead insights on how these can be improved.
+\end{abstract}
+
+\section{Introduction}
+Statistical analysis in sports has been a burgeoning field over the past few decades. In baseball in particular, "analytics" have become especially prominent, with several professional organizations using advanced statistical methods to achieve success and gain a competitive edge. In baseball, one area where it is commonly used is on the side of pitching, enabling pitchers to optimize spin rate, grip, movement, and deception. However, an area with relatively limited study is pitcher injuries. Pitchers are at a relatively high risk of injury, and it has become a growing issue through recent years. This leads to inefficiencies in contract utilization and overall performance for teams, and to lack of career growth for players. 
+
+My research will attempt to categorize injuries into certain boxes:
+\begin{enumerate}
+\item Analysis of the injury by body part (such as an elbow, shoulder, or oblique injury). 
+\item An analysis of how much time each injury caused the pitcher to miss. As a result, my research inquiries will consist of the following:
+\end{enumerate}
+\begin{itemize}
+  \item Do certain pitcher/performance characteristics cause increased days lost from injury overall?
+  \item Do certain pitcher/performance characteristics cause increased days lost from injury to specific body parts?
+  \item Can certain pitcher/performance characteristics be used to predict likelihood or type of player injury, and how well would it do so?
+\end{itemize}
+
+\section{Data}
+The injury data being utilized in this paper is sourced from two main sources: Fangraphs Roster Report, and Spotrac Injured Reserve Tracker. From these sources, I was able to build an excel database of player injuries. This research utilizes data from 2022 in order to build a recent dataset to work with for pitcher injury data. This creates a sample of 560 different pitcher injuries from Major League pitchers across the season. I cleaned and sorted this data, adding calculations such as total days missed. Added to this database are statistics for each of the pitchers on the list, including fastball velocity, slider velocity, curveball velocity, Earned Run Average, and several other common baseball statistics. I also removed pitchers from the database that did not pitch during the 2022 season, as they had no data to rely on. The dataset contains continuous variables for the independent variables: fastball velocity, slider velocity, curveball velocity, Earned Run Average (ERA), innings pitched (IP), Stuff+ (a measure of the quality of the pitcher's overall repertoire), and strikeouts per nine innings (K/9). 
+
+\section{Methods}
+
+Below, I will summarize my methods by several sections, including data preparation and the utilized models and methods to analyze the dataset.
+
+\subsection{Data Preparation}
+
+There were several aspects of the initial dataset that I needed to prepare in order to render it usable for this analysis. 
+
+For one, the initial dataset contained solely injury data from 2022 from all players. I needed to sort this data to exclude position players, since my focus is solely on pitcher injuries. Additionally, the initial dataset did not contain any other of the relevant continuous independent variables, as those were in a different section of Fangraphs. As a result, in preparation of the dataset, I needed to utilize the VLookup command in Excel in order to import the continuous variables to make a utilizable database. Finally, I needed to edit out players who did not throw a pitch in 2022 but were still listed on the injury report, since there is no relevant continuous variable data for each of those players. 
+
+\section{Results}
+
+\section{Discussion}
+
+\section{Extensions}
+
+\end{document}
