@@ -5,14 +5,14 @@
 
 \title{MLB Pitcher Injuries and Contributing Factors}
 \author{Ajay Natarajan - Statistics Major, University of Connecticut}
-\date{December 15, 2023}
+\date{October 30, 2023}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Data analytics have become prominent in usage in professional sports within the last two decades. One of the sports that has seen the most advancement within the field is baseball. However, there are various areas within the game of baseball that have had limited research and which are contributing to major inefficiencies at the professional level. A prominent one of these is injuries, particularly to pitchers. This paper will attempt to use available historical injury data as well as existing player and performance data to find significant factors contributing to pitcher injury, and lead insights on how these can be improved.
+Analytics have become prominent in usage in professional sports within the last two decades. One of the sports that has seen the most advancement within the field is baseball. However, there are various areas within the game of baseball that have had limited research and which are contributing to major inefficiencies at the professional level. A prominent one of these is injuries, particularly to pitchers. This paper will attempt to use available historical injury data as well as existing player and performance data to find significant factors contributing to pitcher injury, and lead insights on how these can be improved.
 \end{abstract}
 
 \section{Introduction}
@@ -28,16 +28,6 @@ My research will try to create:
   \item Can certain pitcher/performance characteristics be used to predict likelihood of player injury, and how well would it do so?
 \end{itemize}
 
-\section{Literature Review}
-
-There have been a relatively limited number of works focusing on pitcher injuries within baseball. Some works have been more prominent than others, but I will cite three works that I think are especially relevant to my work.
-
-The first work that I am citing is a logistic regression analysis from 2009-2019 by Austin Brown and Marie Do predicting multiple injuries to Major League Baseball pitchers (\citet{injurieslogreg}). This study differs from the goals of mine in that it aims to pursue studying the risk of re-injury. While my data takes into account reinjury, it does not specifically focus on it. Additionally, their data is collected over an eleven year sample, while mine is focused on a singular year. There are certain similar threads, including explanatory variables for their analysis being based on factors such as strikeout rate, but their analysis focuses on reinjury risk, while mine focuses on predicting days missed utilizing the explanatory variables.
-
-Another work that I am citing is a critically acclaimed book from the current ESPN baseball journalist Jeff Passan titled "The Arm: Inside the Billion-Dollar Mystery of the Most Valuable Commodity in Sports" (\citet{thearm}). This book focuses on many aspects on what makes pitchers so valuable. The book details the rise of the "power pitcher" and the subsequent focus on velocity (an inspiration for the usage of velocity for three of my seven explanatory variables), and dials in specifically on the rise in arm injuries, especially UCL tears. Ulnar Collateral Ligament tears typically lead to UCL reconstruction (known as Tommy John Surgery), which is one of the most impactful injuries in baseball, with a pitcher recovery time of 12-18 months. He also details the stakeholders in a pitcher's health, which is a fundamental part of the background and relevance of my work in this paper. He finally dives into biomechanical factors to potentially alleviate the epidemic of pitcher injuries, which I do not have the data to analyze myself but which Passan analyzes thoroughly.
-
-Finally, a further work I am citing is a paper in the American Journal of Orthopedics form 2016, detailing the Prediction and Prevention of Injury in MLB Pitchers (\citet{ortho}). The paper differs from mine in that it focuses on all MLB injuries, although it does specifically address that especially pitchers are at a higher risk for injury. Additionally, the paper focuses mainly on biomechanical data, coming to the conclusion that factors such as a lack of external rotation, a lack of total rotation, and a lack of elbow flexion can cause risk of injuries, particularly to the elbow. This is an area that my paper does not address due to a lack of data and a personal lack of expertise in sports biomechanics. It also addresses that no studies have shown that cumulative work leads to additional injury risk for MLB pitchers. This is somewhat surprising and counter-intuitive, given that the overuse trend exists in youth sports, but it emphasizes that that is an area for further study.
-
 \section{Data}
 The injury data being utilized in this paper is sourced from two main sources: Fangraphs Roster Report, and Spotrac Injured Reserve Tracker. From these sources, I was able to build an excel database of player injuries. This research utilizes data from 2022 in order to build a recent dataset to work with for pitcher injury data. This creates a sample of 507 different pitcher injuries from Major League pitchers across the season. I cleaned and sorted this data, adding calculations such as total days missed. Added to this database are statistics for each of the pitchers on the list, including fastball velocity, slider velocity, curveball velocity, Earned Run Average, and several other common baseball statistics. I also removed pitchers from the database that did not pitch during the 2022 season, as they had no data to rely on. The dataset contains continuous variables for the independent variables: fastball velocity, slider velocity, curveball velocity, Earned Run Average (ERA), innings pitched (IP), Stuff+ (a measure of the quality of the pitcher's overall repertoire), and strikeouts per nine innings (K/9). 
 
@@ -49,24 +39,6 @@ Below, I have inputted a histogram of total days missed per injury. This illustr
   \caption{Days Missed from Injury in 2022}
   \label{fig:Fig1}
 \end{figure}
-
-I will also describe each explanatory variable to provide some familiarity with my choices for those as the explanatory variables for this analysis. I am utilizing seven explanatory variables, as described above: fastball velocity, slider velocity, curveball velocity, Earned Run Average (ERA), innings pitched (IP), Stuff+ (a measure of the quality of the pitcher's overall repertoire), and strikeouts per nine innings (K/9).
-
-\begin{itemize}
-  \item \textbf{Fastball Velocity (fastballvelo):} The velocity out of the hand of a pitcher's fastball. The fastball is the primary pitch thrown by most pitchers, and is the fastest, and typically easiest to control for pitchers. It is also typically the easiest to hit for batters. Common baseball logic suggests that faster fastballs are more difficult to track and therefore more difficult to hit, but there have been concerns that faster fastballs can cause pitchers to get injured more often.
-
-  \item \textbf{Slider Velocity (slidervelo):} The velocity out of the hand of a pitcher's slider. The slider is a common "breaking ball" thrown by many pitchers, utilized to provide a movement contrast (the slider "breaks" downwards and to the glove-side) and speed contrast to fastballs. It is usually difficult to hit for batters. I theorize that faster sliders can act similar to faster fastballs in terms of potentially creating more injuries.
-
-  \item \textbf{Curveball Velocity (curvevelo):} The velocity out of the hand of a pitcher's curveball. The curveball is another common "breaking ball" thrown by many pitchers, utilized to provide a movement contrast and speed contrast to fastballs. It is typically slower than sliders, but has an increase in vertical drop. I theorize that faster curveballs can act similarly to faster sliders and fastballs in terms of injury risk.
-
-  \item \textbf{Stuff+ (stuffplus):} A metric created by baseball statistician Eno Sarris several years ago that measures the quality of a pitcher's pitches and overall repertoire. Factors that go into the measurement include release point, pitch speed, pitch shape, movement/break, spin rate, seam-shifted wake, and spin axis \citet{fgstuffplus}. It is quickly becoming a popular pitching analysis tool for measuring a pitcher's repertoire quality. Here, I use it to help quantify whether the quality of a pitcher's repertoire leads to an increase in injury risk.
-
-  \item \textbf{Strikeouts Per Nine (kper9):} A statistic quantifying the total amount of strikeouts a pitcher would have extrapolated over nine innings. Here, I am trying to quantify whether a pitcher's propensity to strike out hitters is detrimental on their injury risk. 
-
-  \item \textbf{Earned Run Average (ERA):} A statistic quantifying the total amount of earned runs a pitcher would have given up, extrapolated over nine innings. This is one of the most commonly used performance statistics publically for pitchers, with a lower value indicating less earned runs (runs that were the responsbility of the pitcher) scoring, and therefore a more effective performance by the pitcher. Here, I am trying to quantify whether a pitcher's overall performance is detrimental on their injury risk.
-
-  \item \textbf{Innings Pitched (IP):} A statistic quantifying the total amount of innings (three outs gained) a pitcher pitches. This is one of the most commonly used volume statistics for pitchers. A higher value indicates, typically, a more "durable" pitcher, and is considered desirable. However, some worry about overuse, with higher innings pitched potentially leading to injuries.
-\end{itemize}
 
 \section{Methods}
 
@@ -138,28 +110,6 @@ For non-velocity continuous variables, significance is also tentative. For reper
 \end{table}
 
 Looking through the results, we can see that no one factor is particularly influential on increasing pitcher injury. This suggests that injury risk is either due to poor luck or more likely to a factor outside the scope of this study (such as poor biomechanics, which have been theorized as a likely source of injury, but which I do not have accessible data for). The most significant factors by the p-value appear to be fastball velocity, curveball velocity, and innings pitched. However, questions must be asked with innings pitched, as that likely covariates with days missed, since increasing days missed would remove opportunities in the finite baseball season to increase innings pitched. As for fastball velocity, that has been theorized to increase pitcher injury (ie. Jacob DeGrom, throwing 101-103mph fastballs getting injured more than Logan Webb, throwing 91-93mph fastballs), so the results are unsurprising. Similar logic has been applied to curveball velocity, so that is unsurprising as well. It's interesting that a similar significance does not apply to slider velocity, but a reasoning likely lies in a biomechanical factor.
-
-I will apply two scatterplots below to show the two largest contributors out of the non-IP explanatory variables. The first is fastball velocity, which can be seen below. 
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.31]{fbvscatter.png}
-  \caption{Scatterplot of Fastball Velocity and Days Missed}
-  \label{fig:Fig2}
-\end{figure}
-
-From this scatterplot, we can back up the results of the earlier histogram in showing that overall, more pitchers miss less days overall, causing a decreasing trend of the total amount of pitchers who miss a certain amount of days as the said number of days of the limit increases. Therefore, in the scatterplot, we can see much clustering towards the bottom. The data is largely scattered, but we can see a weak positive trend of days missed as fastball velocity increases. The trend is nowhere near strong enough or close enough to a potential line of best fit to conclude that this is a steadfast relationship, but it lends credence to the possibility of fastball velocity being a causal factor in total days missed. The plot does not factor in every pitcher, as there are several who do not throw fastballs, but it accounts for the vast majority of the players in the dataset.
-
-The other scatterplot that I plan on including is for curveball velocity. I have included the plot below.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.31]{cbvscatter.png}
-  \caption{Scatterplot of Curveball Velocity and Days Missed}
-  \label{fig:Fig3}
-\end{figure}
-
-From this scatterplot, we can further back up the results of the earlier histogram, since similarly to the fastball velocity scatterplot, the clustering at the bottom of the plot indicates there are generally more pitchers who have shorter-term injuries than those with long-term ones. Similarly to fastball velocity, we can also see a weak positive trend, with a coefficient of 0.0607. This indicates that increasing velocity for curveballs does contribute to a slight increase in days missed due to injury, although the data doesn't show the level of significance here either to determine that there is a steadfast causal relationship between the two. The plot factors in less pitchers than the fastball plot, due to less pitchers throwing a curveball overall, but it has a wider spread, due to a wider range in curveball velocities (ranging from "slow curves" at 65-75 mph to "power" or "knuckle curves" at 82-88 mph).
 
 \section{Discussion}
 
